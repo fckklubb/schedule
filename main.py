@@ -6,6 +6,11 @@ from configs import sheet_prefix, months, m_days, YY, days, five_day_return, shi
 
 
 if __name__ == '__main__':
+    txts = {'input': 'Plz, enter month (1-12 or 0 for all months) OR exit, if the work is done: ',
+            'error': 'Nope! Can\'t accept it :( Try to type \'exit\' if the work is done\nOR enter a correct month number, specifically 1-12 or 0 for all months.. Let\'s try again..',
+            'y_n': 'Are U suuuuure?? Type \'y\' or \'n\', plz: ',
+            'dontdo': 'Ufff, nice.. Don\'t wanna do it..',
+            'start': 'OK, fine.. Starting to set all the year schedule..'}
     input_txt = 'Plz, enter month (1-12 or 0 for all months) OR exit, if the work is done: '
     error_txt = 'Nope! Can\'t accept it :( Try to type \'exit\' if the work is done\nOR enter a correct month number, specifically 1-12 or 0 for all months.. Let\'s try again..'
     while True:
