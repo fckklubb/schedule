@@ -9,29 +9,28 @@ if __name__ == '__main__':
     txts = {'input': 'Plz, enter month (1-12 or 0 for all months) OR exit, if the work is done: ',
             'error': 'Nope! Can\'t accept it :( Try to type \'exit\' if the work is done\nOR enter a correct month number, specifically 1-12 or 0 for all months.. Let\'s try again..',
             'y_n': 'Are U suuuuure?? Type \'y\' or \'n\', plz: ',
-            'dontdo': 'Ufff, nice.. Don\'t wanna do it..',
+            'y_n_only': 'Nope! Type \'y\' or \'n\' only!..',
+            'dontwannado': 'Ufff, nice.. Don\'t wanna do it..',
             'start': 'OK, fine.. Starting to set all the year schedule..'}
-    input_txt = 'Plz, enter month (1-12 or 0 for all months) OR exit, if the work is done: '
-    error_txt = 'Nope! Can\'t accept it :( Try to type \'exit\' if the work is done\nOR enter a correct month number, specifically 1-12 or 0 for all months.. Let\'s try again..'
     while True:
-        option = input(input_txt)
+        option = input(txts['input'])
         option = option.lower()
         if option == 'exit': break
         try:
             option = int(option)
         except ValueError: 
-            print(error_txt)
+            print(txts['error'])
             continue
         if option == 0:
             
             while True:
-                answer = input('Are U suuuuure?? Type \'y\' or \'n\', plz: ')
+                answer = input(txts['y_n'])
                 answer = answer.lower()
                 if answer == 'n':
-                    print('Ufff, nice.. Don\'t wanna do it..')
+                    print(txts['dontwannado'])
                     break    
                 elif answer == 'y':
-                    print('OK, fine.. Starting to set all the year schedule..')
+                    print(txts['start'])
                     wb = load_workbook(filename = SCHEDULE_FILE)
 
                     for m in range(1, 13):
@@ -64,7 +63,7 @@ if __name__ == '__main__':
                         print(f'The work on the month nr. {m} is done!')
                     break
                 else:
-                    print('Nope! Type \'y\' or \'n\' only!..')
+                    print(txts['y_n_only'])
 
         elif option < 13:
             wb = load_workbook(filename = SCHEDULE_FILE)
@@ -96,4 +95,4 @@ if __name__ == '__main__':
             wb.save(filename = SCHEDULE_FILE)
             wb.close()
         else:
-            print(error_txt)
+            print(txts['error'])
