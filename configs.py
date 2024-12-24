@@ -6,7 +6,7 @@ import openpyxl
 from openpyxl import load_workbook
 from openpyxl.workbook import Workbook
 
-SCHEDULE_FILE = 'files\schedule_spb_2024.xlsx'
+SCHEDULE_FILE = 'files/2025.xlsx'
 
 schedule5_2 = [5, 2]
 schedule2_2_3 = [2, 2, 3]
@@ -16,31 +16,27 @@ long_week = [True, True, False, False, True, True, True]
 short_week = [False, False, True, True, False, False, False]
 five_work_day = [True, True, True, True, True, False, False]
 
-YY = 2024
+YY = 2025
 
 @dataclass
 class shift:
     day_one: date
     schedule: str
-    workers_office: []
-    workers_tech: []
+    workers_office: list[str]
+    workers_tech: list[str]
 
-holydays24 = {1: [date(2024, 1, i) for i in range(1,9)],
-              2: [date(2024, 2, 23)],
-              3: [date(2024, 3, 8)],
-              4: [date(2024, 4, 29), date(2024, 4, 30)],
-              5: [date(2024, 5, 1), date(2024, 5, 9), date(2024, 5, 10)],
-              6: [date(2024, 6, 12)],
-              11: [date(2024, 11, 4)],
-              12: [date(2024, 12, 30), date(2024, 12, 31)]}
-exceptions24 = [date(2024,4, 27), date(2024, 11, 2), date(2024, 12, 28)]
+holydays24 = {1: [date(YY, 1, i) for i in range(1,9)],
+              5: [date(YY, 5, 1), date(YY, 5, 2), date(YY, 5, 8), date(YY, 5, 9)],
+              6: [date(YY, 6, 12), date(YY, 6, 13)],
+              12: [date(YY, 12, 31)]}
+exceptions24 = [] #[date(YY,4, 27), date(YY, 11, 2), date(YY, 12, 28)]
 
-shift0 = shift(date(2024, 1, 9), 'five', ['Жуков Роман'], ['Филатов Алексей'])
-shift1 = shift(date(2024, 1, 1), 'shift_work_1', ['Березкина Александра', 'Бобарыкин Глеб'], ['Церетели Кирилл'])
-shift2 = shift(date(2024, 1, 3), 'shift_work_2', ['Смирнов Андрей', 'Ильченко Андрей'], ['Кочурин Роман'])
+shift0 = shift(date(2025, 1, 9), 'five', ['Жуков Роман'], ['Филатов Алексей'])
+shift1 = shift(date(2025, 1, 3), 'shift_work_1', ['Березкина Александра', 'Бобарыкин Глеб'], ['Церетели Кирилл'])
+shift2 = shift(date(2025, 1, 1), 'shift_work_2', ['Смирнов Андрей', 'Гусаров Максим'], ['Васенин Евгений'])
 
 months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
-m_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+m_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 sheet_prefix = 'График/табель работы'
 
@@ -82,12 +78,12 @@ def shift_day_return(d, shift_no):
 class Person:
     name: str
     shift: int
-    vocation: [date] = []
+    vocation: list[date]
     str_plan: int = 0
     str_f_start: int = 0
     str_f_end: int = 0
 
-def getVocationList (start_d: date, days: int) -> [date]:
+def getVocationList (start_d: date, days: int) -> list[date]:
     if days > 28: return None
     pass
 

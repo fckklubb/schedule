@@ -2,7 +2,7 @@ from sys import argv
 from datetime import datetime, date, time
 from openpyxl import load_workbook
 from openpyxl.workbook import Workbook
-from configs import sheet_prefix, months, m_days, YY, days, five_day_return, shift_day_return, SCHEDULE_FILE
+from configs import shift0, shift1, shift2, sheet_prefix, months, m_days, YY, days, five_day_return, shift_day_return, SCHEDULE_FILE
 
 
 if __name__ == '__main__':
@@ -37,6 +37,15 @@ if __name__ == '__main__':
                         print(f'Working on the month nr. {m}..')
                         ws = wb[f"{m}"]
                         ws['A13'] = sheet_prefix + f" {months[m-1]} {YY}"
+                        # set collegues names
+                        ws.cell(row=15, column=3).value = shift0.workers_tech[0]
+                        ws.cell(row=19, column=3).value = shift1.workers_office[0]
+                        ws.cell(row=20, column=3).value = shift1.workers_office[1]
+                        ws.cell(row=21, column=3).value = shift2.workers_office[0]
+                        ws.cell(row=22, column=3).value = shift2.workers_office[1]
+                        ws.cell(row=47, column=3).value = shift1.workers_tech[0]
+                        ws.cell(row=48, column=3).value = shift2.workers_tech[0]
+                        # set schedule
                         for d in range(1, m_days[m-1]+1):
                             day = date(year=YY, month=m, day=d)
                             ws.cell(row=14, column=d+4).value = d
